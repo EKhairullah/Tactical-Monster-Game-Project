@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-f389dd5eed932f22c7a0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "splashPage",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "splashPage::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-splashPage-Debug-29f096034ad76fe5296b.json",
+					"name" : "splashPage",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "splashPage_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-splashPage_autogen-Debug-64cd29f4fe61546fb3cc.json",
+					"name" : "splashPage_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "splashPage_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-splashPage_autogen_timestamp_deps-Debug-5160b4430d1831945bf2.json",
+					"name" : "splashPage_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug",
+		"source" : "/home/khairullah/Tictical Monster/splashPage"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

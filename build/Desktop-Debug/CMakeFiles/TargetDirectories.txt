@@ -1,0 +1,9 @@
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/splashPage.dir
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/install.dir
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/splashPage_autogen_timestamp_deps.dir
+/home/khairullah/Tictical Monster/splashPage/build/Desktop-Debug/CMakeFiles/splashPage_autogen.dir
