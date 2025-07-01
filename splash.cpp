@@ -2,9 +2,14 @@
 #include "./ui_splash.h"
 #include <QTabWidget>
 #include <QWidget>
-splash::splash(QWidget *parent)
+#include <QGraphicsView>
+#include "hexagon.h"
+#include <QInputDialog>
+#include <QMessageBox>
+splash::splash( const QString &filePath, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::splash)
+    , scene(new QGraphicsScene(this))
 {
     ui->setupUi(this);
     ui->tabWidget->findChild<QTabBar *>()->hide();
@@ -18,6 +23,14 @@ splash::splash(QWidget *parent)
     qDebug() << "main page's button clicked\n";
     connect(ui->BackButton, &QPushButton::clicked, this, &splash::backToScreenPage);
     qDebug() << "Back Button clicked\n";
+    
+    ///Draw the hexagon
+    
+    
+    QGraphicsScene *scene = new QGraphicsScene(this);
+    ui->graphicsView->setScene(scene); // فرض بر این که در UI یک GraphicsView داری
+    QString Path = ":/grids/grid1.txt";
+    hex.loadHexGrid(Path,scene,ui->graphicsView);
     
     
     // good style for Buttons
@@ -261,7 +274,7 @@ QPushButton:disabled {
     ui->pic24->setScaledContents(true);
     
     
-    
+
 }
 
 
@@ -300,7 +313,43 @@ void splash::goToGallery()
 
 void splash::goToMainGamePage()
 {
+    QString player1,player2;
+    do{
+        player1 = QInputDialog::getText(nullptr,"Player1","Enter your first player name: ");
+        if(player1.isEmpty())
+        {
+            QMessageBox::warning(this,"Warning","Player1 can not be empty!");
+        }
+        
+        
+    }while(player1.isEmpty());
+    
+    do{
+        player2 = QInputDialog::getText(nullptr,"Player2", "Enter your second player name: ");
+        if(player2.isEmpty())
+        {
+            QMessageBox::warning(this,"Warning", "Player2 can not be empty!");
+        }
+        
+    }while(player2.isEmpty());
+    
+    qDebug() <<"getten the players name\n";
+    
+    
+    ui->lineEditPlayer1->setText(player1);
+    ui->lineEditPlayer2->setText(player2);
+    
+    ui->lineEditPlayer1->setReadOnly(true);
+    ui->lineEditPlayer2->setReadOnly(true);
+    
     ui->tabWidget->setCurrentIndex(3);
+    QWidget *tab2 = ui->tabWidget->widget(3);
+    
+    tab2->setStyleSheet("background-image: url(:/pictures/1.jpg);"
+                        "background-repeat: no-repeat;"
+                        "background-position: center;"
+                        "background-attachment: fixed;"
+                        "background-color: transparent;");
 }
 
 void splash::backToScreenPage()
@@ -312,9 +361,4 @@ void splash::backToScreenPage()
 
 
 
-
-void splash::on_SaveButton_clicked()
-{
-    
-}
 
