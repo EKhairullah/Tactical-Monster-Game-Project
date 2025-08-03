@@ -6,10 +6,13 @@
 #include "hexagon.h"
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QStringList>
+#include <QIntValidator>
+
 splash::splash( const QString &filePath, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::splash)
-    , scene(new QGraphicsScene(this))
+    , scene1(new QGraphicsScene(this))
 {
     ui->setupUi(this);
     ui->tabWidget->findChild<QTabBar *>()->hide();
@@ -19,7 +22,7 @@ splash::splash( const QString &filePath, QWidget *parent)
     qDebug() << "Start Button Clicked\n";
     connect(ui->GalleryButton,&QPushButton::clicked, this, &splash::goToGallery);
     qDebug() <<"Gallery Button Clicked\n";
-    connect(ui->MainPageButton, &QPushButton::clicked, this, &splash::goToMainGamePage);
+    connect(ui->MainPageButton, &QPushButton::clicked, this, &splash::goToSelectionMap);
     qDebug() << "main page's button clicked\n";
     connect(ui->BackButton, &QPushButton::clicked, this, &splash::backToScreenPage);
     qDebug() << "Back Button clicked\n";
@@ -29,12 +32,23 @@ splash::splash( const QString &filePath, QWidget *parent)
     
     QGraphicsScene *scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene); // فرض بر این که در UI یک GraphicsView داری
-    QString Path = ":/grids/grid1.txt";
-    hex.loadHexGrid(Path,scene,ui->graphicsView);
+    QStringList Paths= {":/grids/grid1.txt",":/grids/grid2.txt",":/grids/grid3.txt",
+                         ":/grids/grid4.txt",":/grids/grid5.txt",":/grids/grid6.txt"
+                          ,":/grids/grid7.txt",":/grids/grid8.txt"
+    };
+    ///////**************************************************************for selecting the map macanism\\
+    /// 
+    ///
+    chooseMap = ui->chooseMap_2->text().toInt();
+    qDebug()<<ui->chooseMap_2->text().toInt();
     
+    qDebug()<<"the number of the map is: "<<chooseMap<<"\n";
+    hex.loadHexGrid(Paths[ui->chooseMap_2->text().toInt()],scene,ui->graphicsView);
     
     // good style for Buttons
     ////////////////////////////////////////////////
+    /// 
+    /// 
     ui->startButton->setStyleSheet(R"(QPushButton {
     background-color: #2ecc71;       
     color: white;
@@ -294,8 +308,7 @@ void splash::goToNextTab()
                         "background-position: center;"
                         "background-attachment: fixed;"
                         "background-color: transparent;");
-    
-    
+
 }
 
 void splash::goToGallery()
@@ -313,6 +326,13 @@ void splash::goToGallery()
 
 void splash::goToMainGamePage()
 {
+    
+    hex.loadHexGrid(":/grids/grid1.txt",scene1,ui->graphicsView);
+    qDebug() << "Go to the map selection\n";
+    // selectedMap.clear();
+    ui->tabWidget->setCurrentIndex(1);
+    
+    
     QString player1,player2;
     do{
         player1 = QInputDialog::getText(nullptr,"Player1","Enter your first player name: ");
@@ -333,7 +353,9 @@ void splash::goToMainGamePage()
         
     }while(player2.isEmpty());
     
-    qDebug() <<"getten the players name\n";
+    
+    //mecanism for open the map
+
     
     
     ui->lineEditPlayer1->setText(player1);
@@ -357,8 +379,76 @@ void splash::backToScreenPage()
     ui->tabWidget->setCurrentIndex(1);
 }
 
+void splash::goToSelectionMap()
+{
+    ui->tabWidget->setCurrentIndex(4);
+    QString path1 = ":/grids/grid1.txt";
+    QString path2 = ":/grids/grid2.txt";
+    QString path3 = ":/grids/grid3.txt";
+    QString path4 = ":/grids/grid4.txt";
+    QString path5 = ":/grids/grid5.txt";
+    QString path6 = ":/grids/grid3.txt";
+    QString path7 = ":/grids/grid4.txt";
+    QString path8 = ":/grids/grid5.txt";
+    Hexagon h;
+    qDebug() << "the object of the Hexagon created\n";
+    scene1 = new QGraphicsScene(this);
+    scene2 = new QGraphicsScene(this);
+    scene3 = new QGraphicsScene(this);
+    scene4 = new QGraphicsScene(this);
+    scene5 = new QGraphicsScene(this);
+    scene6 = new QGraphicsScene(this);
+    scene7 = new QGraphicsScene(this);
+    scene8 = new QGraphicsScene(this);
+    ui->map1->setScene(scene1);
+    ui->map2->setScene(scene2);
+    ui->map3->setScene(scene3);
+    ui->map4->setScene(scene4);
+    ui->map5->setScene(scene5);
+    ui->map6->setScene(scene6);
+    ui->map7->setScene(scene7);
+    ui->map8->setScene(scene8);
+    
+    h.loadHexGrid(path1,scene1, ui->map1);
+    h.loadHexGrid(path2,scene2, ui->map2);
+    h.loadHexGrid(path3,scene3, ui->map3);
+    h.loadHexGrid(path4,scene4, ui->map4);
+    h.loadHexGrid(path5,scene5,ui->map5);
+    h.loadHexGrid(path6,scene6, ui->map6);
+    h.loadHexGrid(path7,scene7, ui->map7);
+    h.loadHexGrid(path8,scene8,ui->map8);
+    qDebug() <<"loadHexGrid called with path"<<path1;
+    qDebug() <<"\nloadHexGrid called with path"<<path2;
+    qDebug() <<"\nloadHexGrid called with path"<<path3;
+    
+
+
+    
+}
 
 
 
+
+
+
+
+void splash::on_pushButton_clicked()
+{
+    QIntValidator *valid = new QIntValidator(1,9,this);
+    ui->chooseMap_2->setValidator(valid);
+    
+    //connect to the map
+    connect(ui->chooseMap_2, &QLineEdit::returnPressed, this, [=]() {
+        int number = ui->chooseMap_2->text().toInt();
+        QMessageBox::information(this, "Enter the number of map ", QString("you entered %1 map").arg(number));
+    });
+     
+    qDebug()<<ui->chooseMap_2->text().toInt()<<"chooseMap";
+    
+    qDebug()<<"the number of map is:\n";
+    chooseMap = ui->chooseMap_2->text().toInt();;
+    goToMainGamePage();
+                                      
+}
 
 

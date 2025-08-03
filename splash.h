@@ -12,6 +12,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "hexagon.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class splash;
@@ -33,12 +34,23 @@ private slots:
     void goToGallery();
     void goToMainGamePage();
     void backToScreenPage();
+    void goToSelectionMap();
     
-
+    void onMapSelected(const QString &path);
+    
+    void on_pushButton_clicked();
+    
+    
+    void on_label_7_linkHovered(const QString &link);
+    
 private:
     Ui::splash *ui;
-    QGraphicsScene *scene;
+    QGraphicsScene *scene1,*scene2,*scene3,*scene4,*scene5, *scene6, *scene7, *scene8;
     Hexagon hex;
+    QString selectedMapPath;
+    int chooseMap;
+
+    
     
 };
 #endif // SPLASH_H

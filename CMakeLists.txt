@@ -26,7 +26,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         lanscapes.qrc
         grids.qrc
         Agents.qrc
-        chooseground.h chooseground.cpp
+        hexagon.h hexagon.cpp
+        hexmap.h hexmap.cpp
+        clickablemapitem.h clickablemapitem.cpp
+        
+        
+        
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET splashPage APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
